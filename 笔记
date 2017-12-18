@@ -1,1 +1,18 @@
 1、要在手机上能看
+
+
+乔布斯：页面缩小，双击放大
+
+980px像素  拍脑袋决定的
+
+
+在手机上监控鼠标事件要变成touch事件
+
+
+如果该设备支持touch事件（outouchstart就是null，如果不支持touch事件，则返回就是undefined），那就监听touch
+
+ google 搜索 js detect touch support
+
+in操作符
+
+touches多点触控

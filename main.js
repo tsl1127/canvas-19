@@ -4,7 +4,7 @@ autoSetCanvasSize(yyy)
 
 
 /*监听鼠标事件**/
-listenToMouse(yyy)
+listenToUser(yyy)
 
 
 /****控制橡皮擦是否开启***/
@@ -47,7 +47,7 @@ function drawLine(x1,y1,x2,y2){
   
 }
 
-function listenToMouse (canvas){
+function listenToUser (canvas){
 //function drawCircle(x,y,radius){
  // context.beginPath();
  // context.fillStyle = 'red'
@@ -58,10 +58,13 @@ function listenToMouse (canvas){
 var using = false  //加标记
 var lastPoint = {x:undefined,y:undefined}
 
-//按下去鼠标
-canvas.onmousedown = function(a){
-    var x=a.clientX
-    var y=a.clientY
+
+// 特性检测
+if(document.body.ontouchstart !== undefined){
+//就是触屏设备，touch事件是OK的
+  canvas.ontouchstart = function(a){
+    var x=a.touches[0].clientX
+    var y=a.touches[0].clientY
     using = true
   if(EraserEnabled){
     //using = true
@@ -69,19 +72,16 @@ canvas.onmousedown = function(a){
   }
   else{
     //using = true
-
+  
     lastPoint = {"x":x,"y":y}
     //console.log(lastPoint)
     //drawCircle(x,y,1)    
   }
- 
-}
+  }
 
-//动鼠标
-canvas.onmousemove = function(a){  
-    var x=a.clientX
-    var y=a.clientY
-    
+  canvas.ontouchmove = function(a){
+    var x=a.touches[0].clientX
+    var y=a.touches[0].clientY
     if(!using){
       return
     } 
@@ -93,12 +93,70 @@ canvas.onmousemove = function(a){
     //drawCircle(x,y,1)
     drawLine(lastPoint.x,lastPoint.y,newPoint.x,newPoint.y)
     lastPoint = newPoint   
-         }
+         } 
+  }
+
+  canvas.ontouchend = function(a){
+    using = false
+  }
+}
+else{
+  // 非触屏设备
+// 按下去鼠标
+canvas.onmousedown = function(a){
+  // console.log('down')
+  var x=a.clientX
+  var y=a.clientY
+  using = true
+if(EraserEnabled){
+  //using = true
+  context.clearRect(x-5,y-5,10,10)  
+}
+else{
+  //using = true
+
+  lastPoint = {"x":x,"y":y}
+  //console.log(lastPoint)
+  //drawCircle(x,y,1)    
+}
+
+}
+
+//动鼠标
+canvas.onmousemove = function(a){  
+  // console.log('move')
+  var x=a.clientX
+  var y=a.clientY
   
+  if(!using){
+    return
+  } 
+ 
+if(EraserEnabled){
+    context.clearRect(x-5,y-5,10,10)        
+} else {
+  var newPoint={"x":x,"y":y}
+  //drawCircle(x,y,1)
+  drawLine(lastPoint.x,lastPoint.y,newPoint.x,newPoint.y)
+  lastPoint = newPoint   
+       }
+
 }
 
 //松开鼠标
 canvas.onmouseup = function(z){
-  using = false
-      }
+  // console.log('up')
+using = false
+    }
+
+
+
+
 }
+
+
+}
+
+// yyy.ontouchstart = function(a){
+//   console.log('wo')
+// }
