@@ -1,5 +1,8 @@
 var yyy = document.getElementById('xxx');
 var context = yyy.getContext('2d');//获取上下文
+var lineWidth = 3;
+
+
 autoSetCanvasSize(yyy)
 
 
@@ -9,15 +12,86 @@ listenToUser(yyy)
 
 /****控制橡皮擦是否开启***/
 var EraserEnabled =false
-  eraser.onclick = function(){
-   EraserEnabled = true
-   actions.className = 'actions x'  //前面这个actions是id
-   
+pen.onclick = function(){
+  EraserEnabled = false
+  pen.classList.add('active')
+  eraser.classList.remove('active')
+  // clear.classList.remove('active')
 }
-  brush.onclick =function(){
-   EraserEnabled =false 
-   actions.className = 'actions'
-  }
+eraser.onclick = function(){
+  EraserEnabled = true
+  eraser.classList.add('active')
+  pen.classList.remove('active')
+  // clear.classList.remove('active')
+}
+
+clear.onclick = function(){
+  context.clearRect(0, 0, yyy.width, yyy.height);
+}
+
+save.onclick = function(){
+ var url = yyy.toDataURL("image/png")
+//  window.open(url,'_blank')
+var a = document.createElement('a')
+document.body.appendChild(a)
+a.href = url
+a.download = '我的画儿'
+a.target = '_blank'
+a.click()
+}
+
+
+red.onclick = function(){
+  context.strokeStyle = 'red'
+  red.classList.add('active')
+  green.classList.remove('active')
+  blue.classList.remove('active')
+  black.classList.remove('active')
+
+}
+
+green.onclick = function(){
+  context.strokeStyle = 'green'
+  green.classList.add('active')
+  red.classList.remove('active')
+  blue.classList.remove('active')
+  black.classList.remove('active')
+}
+
+blue.onclick = function(){
+  context.strokeStyle = 'blue'
+  blue.classList.add('active')
+  green.classList.remove('active')
+  red.classList.remove('active')
+  black.classList.remove('active')
+}
+
+black.onclick = function(){
+  context.strokeStyle = 'black'
+  black.classList.add('active')
+  blue.classList.remove('active')
+  green.classList.remove('active')
+  red.classList.remove('active')
+}
+
+thin.onclick = function(){
+  lineWidth = 3
+}
+
+thick.onclick = function(){
+  lineWidth = 5
+}
+
+
+//   eraser.onclick = function(){
+//    EraserEnabled = true
+//    actions.className = 'actions x'  //前面这个actions是id
+   
+// }
+//   brush.onclick =function(){
+//    EraserEnabled =false 
+//    actions.className = 'actions'
+//   }
 
 
 /*********/
@@ -38,9 +112,9 @@ function autoSetCanvasSize(canvas){
 
 function drawLine(x1,y1,x2,y2){
   context.beginPath()
-  context.strokeStyle = 'red'
+  // context.strokeStyle = 'red'
   context.moveTo(x1,y1)  //起点
-  context.lineWidth = 3
+  context.lineWidth = lineWidth
   context.lineTo(x2,y2)  //终点
   context.stroke()
   context.closePath()

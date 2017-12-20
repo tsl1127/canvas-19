@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-Hans">
     <link rel="stylesheet" href="./style.css">
+    <script src='//at.alicdn.com/t/font_515612_3ojdmxzrz89w9udi.js'></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,user-scalable=no, initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0">
     <!-- 解决手机端页面问题 -->
@@ -11,8 +12,28 @@
     <title>我的画板</title>
         <canvas id="xxx" width=300 height=300 > </canvas>
                 <div id="actions" class="actions">
-                <button id="eraser">橡皮擦</button>  
-                <button id="brush">画笔</button>    
+                        <svg id=pen class="icon active">
+                                <use xlink:href="#icon-pen"></use>
+                            </svg>
+                       <svg id=eraser  class="icon">
+                                    <use xlink:href="#icon-erase"></use>
+                        </svg>  
+                        <svg id=clear  class="icon">
+                                <use xlink:href="#icon-clear"></use>
+                    </svg> 
+                    <svg id=save  class="icon">
+                            <use xlink:href="#icon-save"></use>
+                </svg>                       
                 </div>
+        <ol class="colors">
+            <li id= "black" class="black active"></li>
+            <li id= "red" class="red"></li>
+            <li id= "green" class="green"></li>
+            <li id= "blue" class="blue"></li>
+        </ol>
+        <ol class="sizes">
+            <li id="thin" class="thin"></li>
+            <li id="thick" class="thick"></li>            
+        </ol>
                 <script src = "./main.js"></script>
 </html>
