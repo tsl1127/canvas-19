@@ -27,3 +27,7 @@ css用class
 js canvas save as image
 
 
+局域网调试法
+1、看自己局域网里的IP，然后在地址栏里输入该IP:8080
+
+

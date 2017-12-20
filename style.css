@@ -10,7 +10,7 @@ ul,ol{
   width: 1em; height: 1em;
   vertical-align: -0.15em;
   fill: currentColor;
-  overflow: hidden;
+  overflow: hidden;  
 }
 
 
@@ -18,11 +18,14 @@ ul,ol{
   background: white;
   display:block;
 
+  position: fixed;  /*解决在移动端的画画时屏幕移动的问题*/ 
+  top:0px; /*解决在移动端的画画时屏幕移动的问题*/ 
+  left:0px;  /*解决在移动端的画画时屏幕移动的问题*/ 
 }
 
 body{
   /* margin:0px; */
-  overflow: hidden;
+  overflow: hidden;  /*没起作用*/
 }
 
 .actions{

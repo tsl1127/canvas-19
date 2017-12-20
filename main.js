@@ -1,3 +1,5 @@
+
+
 var yyy = document.getElementById('xxx');
 var context = yyy.getContext('2d');//获取上下文
 var lineWidth = 3;
